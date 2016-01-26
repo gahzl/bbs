@@ -1,0 +1,17 @@
+<#macro footer>
+<div style="background-color: #fff; padding: 20px; margin-top:10px;text-align: center;">
+    <div class="container">
+        <div style="padding-bottom: 10px; text-align: left;">
+            <ul class="nav nav-pills">
+                <li>友情链接：</li>
+                <#list links as link>
+                    <li><a href="${link.url!}" target="_blank">${link.name!}</a></li>
+                </#list>
+            </ul>
+        </div>
+      	<a href="http://qhyk.gahzl.com" target="_blank">${siteTitle!}</a>
+        	京ICP备15055537号-1
+        <!-- <script src="http://s4.cnzz.com/z_stat.php?id=1254922003&web_id=1254922003" language="JavaScript"></script> -->
+    </div>
+</div>
+</#macro>
