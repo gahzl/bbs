@@ -166,7 +166,7 @@ public class UserController extends BaseController {
         //裁剪图片
         //如果服务器是tomcat,就不需要修改
         //如果服务器是jetty,需要将下面static/upload/avatar/ 前加一个/,也就是修改成/static/upload/avatar
-        String realPath = getRequest().getServletContext().getRealPath("/") + "/static/upload/avatar/" + uploadFile.getFileName();
+        String realPath = "/static/upload/avatar/" + uploadFile.getFileName();
         System.out.println(realPath);
         ImageUtil.zoomImage(realPath, realPath, 100, 100);
         redirect(Constants.getBaseUrl() + "/user/setting");

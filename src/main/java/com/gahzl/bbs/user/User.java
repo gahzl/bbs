@@ -68,7 +68,7 @@ public class User extends Model<User> {
         if(!StrUtil.isBlank(email)) {
             condition.append(" and email like \"%" + email + "%\" ");
         }
-        return super.paginate(pageNumber, pageSize, "select * from user where 1 = 1 "+condition+" order by in_time desc");
+        return super.paginate(pageNumber, pageSize, "select *"," from user where 1 = 1 "+condition+" order by in_time desc");
     }
 
     public List<User> list() {

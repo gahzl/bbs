@@ -17,7 +17,7 @@ public class Label extends Model<Label> {
     public Page<Label> page(int pageNumber, int pageSize, String name) {
         StringBuffer condition = new StringBuffer();
         if(!StrUtil.isBlank(name)) condition.append(" and l.name like \"%" + name + "%\" ");
-        return super.paginate(pageNumber, pageSize, "select l.* from label l where 1 = 1 " + condition + " order by l.topic_count desc, l.in_time desc");
+        return super.paginate(pageNumber, pageSize, "select l.*"," from label l where 1 = 1 " + condition + " order by l.topic_count desc, l.in_time desc");
     }
 
     public List<Label> findByNameLike(String name) {

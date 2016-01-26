@@ -59,7 +59,7 @@ public class Topic extends Model<Topic> {
             }
             condition.append(" and t.s_id in ("+sid.substring(0, sid.length() - 1)+") ");
         }
-        return super.paginate(pageNumber, pageSize, new String[]{select, condition+orderBy});
+        return super.paginate(pageNumber, pageSize, select, condition+orderBy);
     }
 
     public Topic findByIdWithUser(String id) {
@@ -95,7 +95,7 @@ public class Topic extends Model<Topic> {
                 "(select count(r.id) from reply r where r.tid = t.id) as reply_count," +
                 "(select u.avatar from user u where u.id = t.author_id) as avatar";
     	String from = "from topic t where t.author_id = ? order by in_time desc";
-        return super.paginate(pageNumber, pageSize,new String[]{select,from}, authorId);
+        return super.paginate(pageNumber, pageSize,select,from, authorId);
     }
 
     public Topic findWithSection(String id) {
@@ -109,7 +109,7 @@ public class Topic extends Model<Topic> {
                 "(select u.avatar from user u where u.id = t.last_reply_author_id) as last_reply_author_avatar, " +
                 "(select s.name from section s where s.id = t.s_id) as sectionName ";
     	String from = "from topic t left join reply r on t.id = r.tid where r.author_id = ? group by r.tid order by r.in_time desc";
-        return super.paginate(pageNumber, pageSize, new String[]{select,from}, authorId);
+        return super.paginate(pageNumber, pageSize, select,from, authorId);
     }
 
     //查询话题总数
@@ -121,7 +121,7 @@ public class Topic extends Model<Topic> {
 
     // --------------- 后台查询方法 开始 --------------
     public Page<Topic> page(int pageNumber, int pageSize) {
-        return super.paginate(pageNumber, pageSize, new String[]{"select t.*, s.name as sectionName, s.tab, u.nickname ", "from topic t left join section s on t.s_id = s.id left join user u on t.author_id = u.id order by t.top desc, t.in_time desc"});
+        return super.paginate(pageNumber, pageSize, "select t.*, s.name as sectionName, s.tab, u.nickname ", "from topic t left join section s on t.s_id = s.id left join user u on t.author_id = u.id order by t.top desc, t.in_time desc");
     }
 
     public List<Topic> findToday() {

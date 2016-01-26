@@ -15,11 +15,11 @@ public class Notification extends Model<Notification> {
 
     //查询未读消息
     public Page<Notification> paginate(int pageNumber, int pageSize, String authorId) {
-        return super.paginate(pageNumber, pageSize, new String[]{"select n.*, t.title, u.nickname ",
+        return super.paginate(pageNumber, pageSize, "select n.*, t.title, u.nickname ",
                 "from notification n " +
                 "left join topic t on n.tid = t.id " +
                 "left join user u on u.id = n.from_author_id " +
-                "where n.read = 1 and n.author_id = ? order by n.in_time desc"}, authorId);
+                "where n.read = 1 and n.author_id = ? order by n.in_time desc", authorId);
     }
 
     //查询已读消息

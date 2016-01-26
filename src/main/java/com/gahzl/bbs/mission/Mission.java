@@ -24,8 +24,8 @@ public class Mission extends Model<Mission> {
 
     //查询每日签到列表
     public Page<Mission> paginate(int pageNumber, int pageSize) {
-        return super.paginate(pageNumber, pageSize, new String[]{"select m.*, u.nickname, u.score as totalScore ",
-                "from mission m left join user u on m.author_id = u.id order by m.in_time desc"});
+        return super.paginate(pageNumber, pageSize, "select m.*, u.nickname, u.score as totalScore ",
+                "from mission m left join user u on m.author_id = u.id order by m.in_time desc");
     }
 
     public List<Mission> findTop10() {

@@ -31,13 +31,13 @@ public class Collect extends Model<Collect> {
     }
 
     public Page<Collect> findByAuthorIdWithTopic(int pageNumber, int pageSize, String authorId) {
-        return super.paginate(pageNumber, pageSize, new String[]{" select t.*, s.name as sectionName, s.tab, u.avatar, " +
+        return super.paginate(pageNumber, pageSize, " select t.*, s.name as sectionName, s.tab, u.avatar, " +
                         " (select u.avatar from user u where u.id = t.last_reply_author_id) as last_reply_author_avatar, " +
                         " (select count(r.id) from reply r where r.tid = t.id) as reply_count ",
                         " from collect c left join topic t on c.tid = t.id " +
                         " left join section s on s.id = t.s_id " +
                         " left join user u on u.id = t.author_id " +
-                        " where c.author_id = ?"}, authorId);
+                        " where c.author_id = ?", authorId);
     }
 
     public List<Collect> findByAuthorIdWithTopic(String authorId) {
